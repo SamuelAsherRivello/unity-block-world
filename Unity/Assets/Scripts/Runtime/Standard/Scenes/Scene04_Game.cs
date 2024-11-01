@@ -34,7 +34,7 @@ namespace RMC.BlockWorld.Standard
         //  Methods ---------------------------------------
         private void AddFeature()
         {
-            ConfiguratorMini mini = ConfiguratorMiniSingleton.Instance.ConfiguratorMini;
+            BlockWorldMini mini = BlockWorldMiniSingleton.Instance.BlockWorldMini;
             
             if (mini == null)
             {
@@ -61,12 +61,12 @@ namespace RMC.BlockWorld.Standard
         
         private void RemoveFeature()
         {
-            if (ConfiguratorMiniSingleton.IsShuttingDown)
+            if (BlockWorldMiniSingleton.IsShuttingDown)
             {
                 return;
             }
             
-            ConfiguratorMini mini = ConfiguratorMiniSingleton.Instance.ConfiguratorMini;
+            BlockWorldMini mini = BlockWorldMiniSingleton.Instance.BlockWorldMini;
             
             if (mini == null)
             {

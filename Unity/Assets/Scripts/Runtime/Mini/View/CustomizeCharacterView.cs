@@ -31,7 +31,7 @@ namespace RMC.BlockWorld.Mini.View
         
         public Button RandomizeButton { get { return _uiDocument?.rootVisualElement.Q<Button>("RandomizeButton"); }}
         
-        public Label StatusLabel { get { return _uiDocument?.rootVisualElement.Q<Label>("StatusLabel"); }}
+        public Label TitleLabel { get { return _uiDocument?.rootVisualElement.Q<Label>("TitleLabel"); }}
         
         
         //  Fields ----------------------------------------
@@ -55,7 +55,7 @@ namespace RMC.BlockWorld.Mini.View
                 _isInitialized = true;
                 _context = context;
 
-                ConfiguratorModel model = Context.ModelLocator.GetItem<ConfiguratorModel>();
+                BlockWorldModel model = Context.ModelLocator.GetItem<BlockWorldModel>();
                 model.CharacterData.OnValueChanged.AddListener(CharacterData_OnValueChanged);
                 RandomizeButton.clicked += RandomizeButton_OnClicked;
                 RefreshUI();
@@ -76,7 +76,7 @@ namespace RMC.BlockWorld.Mini.View
         //  Unity Methods ---------------------------------
         protected void OnDestroy()
         {
-            ConfiguratorModel model = Context?.ModelLocator.GetItem<ConfiguratorModel>();
+            BlockWorldModel model = Context?.ModelLocator.GetItem<BlockWorldModel>();
             if (model == null)
             {
                 return;
@@ -90,9 +90,10 @@ namespace RMC.BlockWorld.Mini.View
         //  Methods ---------------------------------------
         private void RefreshUI()
         {
-            ConfiguratorModel model = Context.ModelLocator.GetItem<ConfiguratorModel>();
+            RequireIsInitialized();
+            
+            BlockWorldModel model = Context.ModelLocator.GetItem<BlockWorldModel>();
             RandomizeButton.SetEnabled(model.HasLoadedService.Value);
-            StatusLabel.text = $"Set The\nCharacter\nColors";
         }
         
         

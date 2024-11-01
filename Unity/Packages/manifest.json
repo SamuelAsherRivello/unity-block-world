@@ -49,16 +49,13 @@
     {
       "name": "Npmjs.org",
       "url": "https://registry.npmjs.org",
-      "scopes": [
-        "com.rmc"
-      ]
+      "scopes": ["com.rmc"]
     },
     {
       "name": "OpenUPM.com",
       "url": "https://package.openupm.com",
-      "scopes": [
-        "com.virtualmaker"
-      ]
+      "scopes": ["com.virtualmaker"]
     }
-  ]
+  ],
+  "testables": []
 }

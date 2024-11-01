@@ -4,6 +4,7 @@ using RMC.BlockWorld.Mini.Model.Data;
 using RMC.BlockWorld.Mini.Service;
 using RMC.BlockWorld.Mini.Service.Storage;
 using RMC.BlockWorld.Mini.View;
+using RMC.BlockWorld.Standard;
 using RMC.Mini;
 
 namespace RMC.BlockWorld.Mini.Controller
@@ -13,10 +14,10 @@ namespace RMC.BlockWorld.Mini.Controller
     /// the <see cref="IConcern"/>s and contains the core app logic 
     /// </summary>
     public class DeveloperConsoleController: BaseController // Extending 'base' is optional
-        <ConfiguratorModel, DeveloperConsoleView, ConfiguratorService> 
+        <BlockWorldModel, DeveloperConsoleView, LocalDiskStorageService> 
     {
         public DeveloperConsoleController(
-            ConfiguratorModel model, DeveloperConsoleView view, ConfiguratorService service) 
+            BlockWorldModel model, DeveloperConsoleView view, LocalDiskStorageService service) 
             : base(model, view, service)
         {
         }
@@ -31,6 +32,8 @@ namespace RMC.BlockWorld.Mini.Controller
 
                 //
                 _view.OnReset.AddListener(View_OnReset);
+                _view.OnRandomizeLanguage.AddListener(View_OnRandomizeLanguage);
+                
 
                 // Load the data as needed
                 _service.OnLoadCompleted.AddListener(Service_OnLoadCompleted);
@@ -50,6 +53,13 @@ namespace RMC.BlockWorld.Mini.Controller
 
         
         //  Event Handlers --------------------------------
+        
+        private async void View_OnRandomizeLanguage()
+        {
+            RequireIsInitialized();
+            await CustomLocalizationUtility.SetSelectedLocaleToNextAsync();
+        }
+            
         private void View_OnReset()
         {
             RequireIsInitialized();
@@ -62,16 +72,16 @@ namespace RMC.BlockWorld.Mini.Controller
             _service.SaveEnvironmentData(_model.EnvironmentData.Value);
         }
         
-        private void Service_OnLoadCompleted(ConfiguratorServiceData configuratorServiceData)
+        private void Service_OnLoadCompleted(LocalDiskStorageServiceDto localDiskStorageServiceDto)
         {
             RequireIsInitialized();
             _model.HasLoadedService.Value = true;
             
-            if (configuratorServiceData != null)
+            if (localDiskStorageServiceDto != null)
             {
                 // Set FROM the saved data. Don't save again here.
-                _model.CharacterData.Value = configuratorServiceData.CharacterData;
-                _model.EnvironmentData.Value = configuratorServiceData.EnvironmentData;
+                _model.CharacterData.Value = localDiskStorageServiceDto.CharacterData;
+                _model.EnvironmentData.Value = localDiskStorageServiceDto.EnvironmentData;
             }
             else
             {

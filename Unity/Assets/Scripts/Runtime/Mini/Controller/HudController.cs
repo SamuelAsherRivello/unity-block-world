@@ -4,6 +4,7 @@ using RMC.BlockWorld.Mini.Model;
 using RMC.BlockWorld.Mini.Model.Data;
 using RMC.BlockWorld.Mini.Service;
 using RMC.BlockWorld.Mini.View;
+using RMC.BlockWorld.Standard;
 using RMC.Mini;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,10 +16,10 @@ namespace RMC.BlockWorld.Mini.Controller
     /// the <see cref="IConcern"/>s and contains the core app logic 
     /// </summary>
     public class HudController: BaseController // Extending 'base' is optional
-        <ConfiguratorModel, HudView, ConfiguratorService> 
+        <BlockWorldModel, HudView, LocalDiskStorageService> 
     {
         public HudController(
-            ConfiguratorModel model, HudView view, ConfiguratorService service) 
+            BlockWorldModel model, HudView view, LocalDiskStorageService service) 
             : base(model, view, service)
         {
             
@@ -35,6 +36,7 @@ namespace RMC.BlockWorld.Mini.Controller
                 _view.OnReset.AddListener(View_OnReset);
                 _view.OnQuit.AddListener(View_OnQuit);
                 _view.OnBack.AddListener(View_OnBack);
+                _view.OnNextLanguage.AddListener(View_OnNextLanguage);
                 _view.OnDeveloperConsole.AddListener(View_OnDeveloperConsole);
             }
         }
@@ -57,6 +59,20 @@ namespace RMC.BlockWorld.Mini.Controller
         }
         
         
+        private void View_OnBack()
+        {
+            RequireIsInitialized();
+            Context.CommandManager.InvokeCommand(new LoadSceneRequestCommand(BlockWorldConstants.Scene01_Menu));
+        }
+        
+        
+        private void View_OnDeveloperConsole()
+        {
+            RequireIsInitialized();
+            Context.CommandManager.InvokeCommand(new LoadSceneRequestCommand(BlockWorldConstants.Scene05_DeveloperConsole));
+        }
+
+        
         private void View_OnReset()
         {
             RequireIsInitialized();
@@ -66,18 +82,12 @@ namespace RMC.BlockWorld.Mini.Controller
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         
-        
-        private void View_OnBack()
+
+        private async void View_OnNextLanguage()
         {
             RequireIsInitialized();
-            Context.CommandManager.InvokeCommand(new LoadSceneRequestCommand(ConfiguratorConstants.Scene01_Menu));
-        }
-        
-        
-        private void View_OnDeveloperConsole()
-        {
-            RequireIsInitialized();
-            Context.CommandManager.InvokeCommand(new LoadSceneRequestCommand(ConfiguratorConstants.Scene05_DeveloperConsole));
+            await CustomLocalizationUtility.SetSelectedLocaleToNextAsync();
+            
         }
     }
 }

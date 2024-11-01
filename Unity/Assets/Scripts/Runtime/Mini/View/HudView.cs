@@ -33,11 +33,15 @@ namespace RMC.BlockWorld.Mini.View
         [HideInInspector] 
         public readonly UnityEvent OnReset = new UnityEvent();
         
+        [HideInInspector] 
+        public readonly UnityEvent OnNextLanguage = new UnityEvent();
+        
+        
         //  Properties ------------------------------------
         public bool IsInitialized { get { return _isInitialized;} }
         public IContext Context { get { return _context;} }
         
-        public Label StatusLabel { get { return _uiDocument?.rootVisualElement.Q<Label>("StatusLabel"); }}
+        public Label TitleLabel { get { return _uiDocument?.rootVisualElement.Q<Label>("TitleLabel"); }}
         public Button BackButton { get { return _uiDocument?.rootVisualElement.Q<Button>("BackButton"); }}
         public Button DeveloperConsoleButton { get { return _uiDocument?.rootVisualElement.Q<Button>("DeveloperConsoleButton"); }}
         
@@ -52,6 +56,7 @@ namespace RMC.BlockWorld.Mini.View
         // Input
         private InputAction _quitInputAction;
         private InputAction _resetInputAction;
+        private InputAction _nextLanguageInputAction;
         
         //  Initialization  -------------------------------
         public void Initialize(IContext context)
@@ -61,11 +66,11 @@ namespace RMC.BlockWorld.Mini.View
                 _isInitialized = true;
                 _context = context;
 
-                ConfiguratorModel model = Context.ModelLocator.GetItem<ConfiguratorModel>();
+                BlockWorldModel model = Context.ModelLocator.GetItem<BlockWorldModel>();
                 model.HasLoadedService.OnValueChanged.AddListener(ServiceHasLoaded_OnValueChanged);
 
                 BackButton.clicked += BackButton_OnClicked;
-                DeveloperConsoleButton.clicked += DeveloperConsoleButtonOnClicked;
+                DeveloperConsoleButton.clicked += DeveloperConsoleButton_OnClicked;
                 
                 RefreshUI();
                 
@@ -87,6 +92,7 @@ namespace RMC.BlockWorld.Mini.View
         {
             _quitInputAction = InputSystem.actions.FindAction("Quit");
             _resetInputAction = InputSystem.actions.FindAction("Reset");
+            _nextLanguageInputAction = InputSystem.actions.FindAction("NextLanguage");
         }
 
         
@@ -94,6 +100,7 @@ namespace RMC.BlockWorld.Mini.View
         {
             _resetInputAction.Enable();
             _quitInputAction.Enable();
+            _nextLanguageInputAction.Enable();
         }
         
         
@@ -101,6 +108,7 @@ namespace RMC.BlockWorld.Mini.View
         {
             _resetInputAction.Disable();
             _quitInputAction.Disable();
+            _nextLanguageInputAction.Disable();
         }
         
         
@@ -115,12 +123,17 @@ namespace RMC.BlockWorld.Mini.View
             {
                 OnQuit.Invoke();
             }
+
+            if (_nextLanguageInputAction.WasPerformedThisFrame())
+            {
+                OnNextLanguage.Invoke();
+            }
         }
 
 
         protected void OnDestroy()
         {
-            ConfiguratorModel model = Context?.ModelLocator.GetItem<ConfiguratorModel>();
+            BlockWorldModel model = Context?.ModelLocator.GetItem<BlockWorldModel>();
             if (model == null)
             {
                 return;
@@ -133,8 +146,10 @@ namespace RMC.BlockWorld.Mini.View
         //  Methods ---------------------------------------
         private void RefreshUI()
         {
-            ConfiguratorModel model = Context.ModelLocator.GetItem<ConfiguratorModel>();
-            StatusLabel.text = SceneManager.GetActiveScene().name;
+            RequireIsInitialized();
+            
+            BlockWorldModel model = Context.ModelLocator.GetItem<BlockWorldModel>();
+            TitleLabel.text = SceneManager.GetActiveScene().name;
             BackButton.SetEnabled(model.HasLoadedService.Value && model.HasNavigationBack.Value);
             DeveloperConsoleButton.SetEnabled(model.HasLoadedService.Value && model.HasNavigationDeveloperConsole.Value);
         }
@@ -153,7 +168,7 @@ namespace RMC.BlockWorld.Mini.View
             OnBack.Invoke();
         }
 
-        private void DeveloperConsoleButtonOnClicked()
+        private void DeveloperConsoleButton_OnClicked()
         {
             OnDeveloperConsole.Invoke();
         }

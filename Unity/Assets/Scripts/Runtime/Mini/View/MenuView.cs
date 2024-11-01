@@ -31,7 +31,7 @@ namespace RMC.BlockWorld.Mini.View
         [HideInInspector] 
         public readonly UnityEvent OnCustomizeEnvironment = new UnityEvent();
         
-        public Label StatusLabel { get { return _uiDocument?.rootVisualElement?.Q<Label>("StatusLabel"); }}
+        public Label TitleLabel { get { return _uiDocument?.rootVisualElement?.Q<Label>("TitleLabel"); }}
         public Button PlayGameButton { get { return _uiDocument?.rootVisualElement?.Q<Button>("PlayGameButton"); }}
         public Button CustomizeCharacterButton { get { return _uiDocument?.rootVisualElement?.Q<Button>("CustomizeCharacterButton"); }}
         public Button CustomizeEnvironmentButton { get { return _uiDocument?.rootVisualElement?.Q<Button>("CustomizeEnvironmentButton"); }}
@@ -66,7 +66,7 @@ namespace RMC.BlockWorld.Mini.View
                 _isInitialized = true;
                 _context = context;
 
-                ConfiguratorModel model = Context.ModelLocator.GetItem<ConfiguratorModel>();
+                BlockWorldModel model = Context.ModelLocator.GetItem<BlockWorldModel>();
                 model.CharacterData.OnValueChanged.AddListener(CharacterData_OnValueChanged);
                 model.EnvironmentData.OnValueChanged.AddListener(EnvironmentData_OnValueChanged);
                 //
@@ -90,7 +90,7 @@ namespace RMC.BlockWorld.Mini.View
         //  Unity Methods ---------------------------------
         protected void OnDestroy()
         {
-            ConfiguratorModel model = Context.ModelLocator.GetItem<ConfiguratorModel>();
+            BlockWorldModel model = Context.ModelLocator.GetItem<BlockWorldModel>();
             if (model == null)
             {
                 return;
@@ -105,11 +105,7 @@ namespace RMC.BlockWorld.Mini.View
         //  Methods ---------------------------------------
         private void RefreshUI()
         {
-            if (StatusLabel == null)
-            {
-                return;
-            }
-            StatusLabel.text = $"{ConfiguratorConstants.ProjectTitle}";
+            // Optional: Update any text here...
         }
         
         

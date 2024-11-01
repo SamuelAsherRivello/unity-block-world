@@ -26,8 +26,8 @@ namespace RMC.BlockWorld.Mini.Feature
             RequireIsInitialized();
             
             // Get from mini
-            ConfiguratorModel model = MiniMvcs.ModelLocator.GetItem<ConfiguratorModel>();
-            ConfiguratorService service = MiniMvcs.ServiceLocator.GetItem<ConfiguratorService>();
+            BlockWorldModel model = MiniMvcs.ModelLocator.GetItem<BlockWorldModel>();
+            LocalDiskStorageService service = MiniMvcs.ServiceLocator.GetItem<LocalDiskStorageService>();
             
             // Create new controller
             GameController controller = 

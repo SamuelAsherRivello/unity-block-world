@@ -3,6 +3,7 @@ using RMC.Mini.View;
 using RMC.BlockWorld.Mini.Controller;
 using RMC.BlockWorld.Mini.Model;
 using RMC.BlockWorld.Mini.Model.Data;
+using RMC.BlockWorld.Standard;
 using RMC.BlockWorld.Standard.Objects;
 using RMC.Mini;
 using UnityEngine;
@@ -25,13 +26,18 @@ namespace RMC.BlockWorld.Mini.View
         [HideInInspector] 
         public readonly UnityEvent OnReset = new UnityEvent();
         
+        [HideInInspector] 
+        public readonly UnityEvent OnRandomizeLanguage = new UnityEvent();
+        
         
         //  Properties ------------------------------------
         public bool IsInitialized { get { return _isInitialized;} }
         public IContext Context { get { return _context;} }
         public Button ResetButton { get { return _uiDocument?.rootVisualElement.Q<Button>("ResetButton"); }}
-        public Label StatusLabel { get { return _uiDocument?.rootVisualElement.Q<Label>("StatusLabel"); }}
-        public Label SubstatusLabel { get { return _uiDocument?.rootVisualElement.Q<Label>("SubstatusLabel"); }}
+        public Button NextLanguageButton { get { return _uiDocument?.rootVisualElement.Q<Button>("NextLanguageButton"); }}
+        
+        public Label TitleLabel { get { return _uiDocument?.rootVisualElement.Q<Label>("TitleLabel"); }}
+        public Label SubtitleLabel { get { return _uiDocument?.rootVisualElement.Q<Label>("SubtitleLabel"); }}
         
         //  Fields ----------------------------------------
         private bool _isInitialized = false;
@@ -57,9 +63,10 @@ namespace RMC.BlockWorld.Mini.View
                 _isInitialized = true;
                 _context = context;
 
-                ResetButton.clicked += ResetButtonOnClicked;
+                ResetButton.clicked += ResetButton_OnClicked;
+                NextLanguageButton.clicked += NextLanguageButton_OnClicked;
                 
-                ConfiguratorModel model = Context.ModelLocator.GetItem<ConfiguratorModel>();
+                BlockWorldModel model = Context.ModelLocator.GetItem<BlockWorldModel>();
                 model.CharacterData.OnValueChanged.AddListener(CharacterData_OnValueChanged);
                 model.EnvironmentData.OnValueChanged.AddListener(EnvironmentData_OnValueChanged);
                 RefreshUI();
@@ -80,7 +87,7 @@ namespace RMC.BlockWorld.Mini.View
         //  Unity Methods ---------------------------------
         protected void OnDestroy()
         {
-            ConfiguratorModel model = Context.ModelLocator.GetItem<ConfiguratorModel>();
+            BlockWorldModel model = Context.ModelLocator.GetItem<BlockWorldModel>();
             if (model == null)
             {
                 return;
@@ -93,14 +100,17 @@ namespace RMC.BlockWorld.Mini.View
 
 
         //  Methods ---------------------------------------
-        private void RefreshUI()
+        private async void RefreshUI()
         {
-            ConfiguratorModel model = Context.ModelLocator.GetItem<ConfiguratorModel>();
+            RequireIsInitialized();
+
+            BlockWorldModel model = Context.ModelLocator.GetItem<BlockWorldModel>();
             ResetButton.SetEnabled(model.HasLoadedService.Value && 
                                    (!model.CharacterDataIsDefault() || !model.EnvironmentDataIsDefault()));
-            
-            StatusLabel.text = $"Reset The\nColors";
-            SubstatusLabel.text = $"Keys:\nUse [R] to reload any Scene\nUse [Q] to quit from any Scene";
+
+            bool hasMultipleLanguages = await CustomLocalizationUtility.GetAvailableLocalesCountAsync() > 1;
+            NextLanguageButton.SetEnabled(model.HasLoadedService.Value && hasMultipleLanguages);
+
         }
         
         
@@ -128,7 +138,14 @@ namespace RMC.BlockWorld.Mini.View
             _environment.EnvironmentData = currentValue;
         }
         
-        private void ResetButtonOnClicked()
+        private void NextLanguageButton_OnClicked()
+        {
+            OnRandomizeLanguage.Invoke();
+            RefreshUI();
+        }
+        
+        
+        private void ResetButton_OnClicked()
         {
             OnReset.Invoke();
             RefreshUI();

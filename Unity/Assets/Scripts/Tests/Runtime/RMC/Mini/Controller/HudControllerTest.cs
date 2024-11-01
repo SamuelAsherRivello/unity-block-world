@@ -11,22 +11,22 @@ namespace RMC.BlockWorld.Mini.Controller
 {
     
     [TestFixture]
-    [Category ("RMC.Mini.Configurator")]
+    [Category ("RMC.BlockWorld.Mini")]
     public class HudControllerTest
     {
         private HudController _hudController;
-        private ConfiguratorModel _model;
+        private BlockWorldModel _model;
         private HudView _view;
-        private ConfiguratorService _service;
+        private LocalDiskStorageService _service;
         private IContext _context;
 
         [SetUp]
         public void SetUp()
         {
             _context = new BaseContext();
-            _model = new ConfiguratorModel();
+            _model = new BlockWorldModel();
             _view = new GameObject().AddComponent<HudView>();
-            _service = new ConfiguratorService();
+            _service = new LocalDiskStorageService();
             _hudController = new HudController(_model, _view, _service);
         }
 

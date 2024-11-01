@@ -9,16 +9,17 @@ using UnityEngine.TestTools;
 namespace RMC.BlockWorld.Standard
 {
     [TestFixture]
-    [Category ("RMC.Mini.Configurator")]
+    [Category ("RMC.BlockWorld.Standard")]
     public class AllScenesTest
     {
+        //NOTE: Keep here, I tried to move this to BlockWorldConstants, but the ValueSource fails when run.
         private static readonly List<string> SceneNames = new List<string>
         {
-            ConfiguratorConstants.Scene01_Menu,
-            ConfiguratorConstants.Scene02_CustomizeCharacter,
-            ConfiguratorConstants.Scene03_CustomizeEnvironment ,
-            ConfiguratorConstants.Scene04_Game,
-            ConfiguratorConstants.Scene05_DeveloperConsole
+            BlockWorldConstants.Scene01_Menu,
+            BlockWorldConstants.Scene02_CustomizeCharacter,
+            BlockWorldConstants.Scene03_CustomizeEnvironment ,
+            BlockWorldConstants.Scene04_Game,
+            BlockWorldConstants.Scene05_DeveloperConsole
         };
         
         [SetUp]

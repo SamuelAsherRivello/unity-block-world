@@ -13,10 +13,10 @@ namespace RMC.BlockWorld.Mini.Controller
     /// the <see cref="IConcern"/>s and contains the core app logic 
     /// </summary>
     public class CustomizeEnvironmentController: BaseController // Extending 'base' is optional
-        <ConfiguratorModel, CustomizeEnvironmentView, ConfiguratorService> 
+        <BlockWorldModel, CustomizeEnvironmentView, LocalDiskStorageService> 
     {
         public CustomizeEnvironmentController(
-            ConfiguratorModel model, CustomizeEnvironmentView view, ConfiguratorService service) 
+            BlockWorldModel model, CustomizeEnvironmentView view, LocalDiskStorageService service) 
             : base(model, view, service)
         {
         }
@@ -59,16 +59,16 @@ namespace RMC.BlockWorld.Mini.Controller
             _service.SaveEnvironmentData(_model.EnvironmentData.Value);
         }
         
-        private void Service_OnLoadCompleted(ConfiguratorServiceData configuratorServiceData)
+        private void Service_OnLoadCompleted(LocalDiskStorageServiceDto localDiskStorageServiceDto)
         {
             RequireIsInitialized();
             _model.HasLoadedService.Value = true;
             
-            if (configuratorServiceData != null)
+            if (localDiskStorageServiceDto != null)
             {
                 // Set FROM the saved data. Don't save again here.
-                _model.CharacterData.Value = configuratorServiceData.CharacterData;
-                _model.EnvironmentData.Value = configuratorServiceData.EnvironmentData;
+                _model.CharacterData.Value = localDiskStorageServiceDto.CharacterData;
+                _model.EnvironmentData.Value = localDiskStorageServiceDto.EnvironmentData;
             }
             else
             {

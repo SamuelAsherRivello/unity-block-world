@@ -53,6 +53,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextLanguage"",
+                    ""type"": ""Button"",
+                    ""id"": ""1b56ef56-53c4-45c8-aef8-6bce61aa2c61"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -207,6 +216,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b0a16e92-ccde-4e1f-b5d1-8eb23f49d904"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""NextLanguage"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -797,6 +817,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Reset = m_Player.FindAction("Reset", throwIfNotFound: true);
         m_Player_Quit = m_Player.FindAction("Quit", throwIfNotFound: true);
+        m_Player_NextLanguage = m_Player.FindAction("NextLanguage", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -879,6 +900,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Reset;
     private readonly InputAction m_Player_Quit;
+    private readonly InputAction m_Player_NextLanguage;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -886,6 +908,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Reset => m_Wrapper.m_Player_Reset;
         public InputAction @Quit => m_Wrapper.m_Player_Quit;
+        public InputAction @NextLanguage => m_Wrapper.m_Player_NextLanguage;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -904,6 +927,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Quit.started += instance.OnQuit;
             @Quit.performed += instance.OnQuit;
             @Quit.canceled += instance.OnQuit;
+            @NextLanguage.started += instance.OnNextLanguage;
+            @NextLanguage.performed += instance.OnNextLanguage;
+            @NextLanguage.canceled += instance.OnNextLanguage;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -917,6 +943,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Quit.started -= instance.OnQuit;
             @Quit.performed -= instance.OnQuit;
             @Quit.canceled -= instance.OnQuit;
+            @NextLanguage.started -= instance.OnNextLanguage;
+            @NextLanguage.performed -= instance.OnNextLanguage;
+            @NextLanguage.canceled -= instance.OnNextLanguage;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1102,6 +1131,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnReset(InputAction.CallbackContext context);
         void OnQuit(InputAction.CallbackContext context);
+        void OnNextLanguage(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

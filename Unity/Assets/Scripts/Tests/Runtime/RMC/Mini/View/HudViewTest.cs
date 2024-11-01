@@ -9,15 +9,15 @@ using UnityEngine.UIElements;
 namespace RMC.BlockWorld.Mini.View
 {
     [TestFixture]
-    [Category ("RMC.Mini.Configurator")]
+    [Category ("RMC.BlockWorld.Mini")]
     public class HudViewTest
     {
         private HudView _hudView;
-        private ConfiguratorModel _model;
+        private BlockWorldModel _model;
         private IContext _context;
         private UIDocument _uiDocument;
         private VisualElement _rootVisualElement;
-        private Label _statusLabel;
+        private Label _titleLabel;
         private Button _backButton;
         private Button _developerConsoleButton;
 
@@ -26,17 +26,17 @@ namespace RMC.BlockWorld.Mini.View
         {
             _hudView = new GameObject().AddComponent<HudView>();
 
-            _model = new ConfiguratorModel();
+            _model = new BlockWorldModel();
             _context = new BaseContext();
             
             _context.ModelLocator.AddItem(_model);
 
             _rootVisualElement = new VisualElement();
-            _statusLabel = new Label { name = "StatusLabel" };
+            _titleLabel = new Label { name = "TitleLabel" };
             _backButton = new Button { name = "BackButton" };
             _developerConsoleButton = new Button { name = "DeveloperConsoleButton" };
 
-            _rootVisualElement.Add(_statusLabel);
+            _rootVisualElement.Add(_titleLabel);
             _rootVisualElement.Add(_backButton);
             _rootVisualElement.Add(_developerConsoleButton);
 
@@ -74,7 +74,7 @@ namespace RMC.BlockWorld.Mini.View
             _hudView.Initialize(_context);
 
             // Assert
-            Assert.AreEqual(SceneManager.GetActiveScene().name, _statusLabel.text);
+            Assert.AreEqual(SceneManager.GetActiveScene().name, _titleLabel.text);
             Assert.IsFalse(_backButton.enabledSelf);
         }
 
@@ -108,7 +108,7 @@ namespace RMC.BlockWorld.Mini.View
             _model.HasLoadedService.Value = true;
 
             // Assert
-            Assert.AreEqual(SceneManager.GetActiveScene().name, _statusLabel.text);
+            Assert.AreEqual(SceneManager.GetActiveScene().name, _titleLabel.text);
             Assert.IsFalse(_backButton.enabledSelf);
             Assert.IsFalse(_developerConsoleButton.enabledSelf);
         }

@@ -923,7 +923,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3225269067449381715, guid: e5c80748fea34f544a827aa332531e12, type: 3}
       propertyPath: m_Name
-      value: ConfiguratorMiniSingleton
+      value: BlockWorldMiniSingleton
       objectReference: {fileID: 0}
     - target: {fileID: 3225269067449381715, guid: e5c80748fea34f544a827aa332531e12, type: 3}
       propertyPath: m_StaticEditorFlags
