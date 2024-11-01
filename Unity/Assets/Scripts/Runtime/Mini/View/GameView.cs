@@ -25,8 +25,8 @@ namespace RMC.BlockWorld.Mini.View
         public bool IsInitialized { get { return _isInitialized;} }
         public IContext Context { get { return _context;} }
         
-        public Label StatusLabel { get { return _uiDocument?.rootVisualElement?.Q<Label>("StatusLabel"); }}
-        public Label SubstatusLabel { get { return _uiDocument?.rootVisualElement?.Q<Label>("SubstatusLabel"); }}
+        public Label TitleLabel { get { return _uiDocument?.rootVisualElement?.Q<Label>("TitleLabel"); }}
+        public Label SubtitleLabel { get { return _uiDocument?.rootVisualElement?.Q<Label>("SubtitleLabel"); }}
 
         
         //  Fields ----------------------------------------
@@ -92,13 +92,8 @@ namespace RMC.BlockWorld.Mini.View
         {
             RequireIsInitialized();
             
-            if (StatusLabel == null)
-            {
-                return;
-            }
-            ConfiguratorModel model = Context.ModelLocator.GetItem<ConfiguratorModel>();
-            StatusLabel.text = "Control\n The Player";
-            SubstatusLabel.text = $"Keys:\nUse [Arrows] / [WASD] to move\n\nThat's the full game :)";
+            // Optional: Update any text here...
+            
         }
         
         

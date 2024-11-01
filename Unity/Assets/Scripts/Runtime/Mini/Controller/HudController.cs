@@ -4,6 +4,7 @@ using RMC.BlockWorld.Mini.Model;
 using RMC.BlockWorld.Mini.Model.Data;
 using RMC.BlockWorld.Mini.Service;
 using RMC.BlockWorld.Mini.View;
+using RMC.BlockWorld.Standard;
 using RMC.Mini;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -35,6 +36,7 @@ namespace RMC.BlockWorld.Mini.Controller
                 _view.OnReset.AddListener(View_OnReset);
                 _view.OnQuit.AddListener(View_OnQuit);
                 _view.OnBack.AddListener(View_OnBack);
+                _view.OnNextLanguage.AddListener(View_OnNextLanguage);
                 _view.OnDeveloperConsole.AddListener(View_OnDeveloperConsole);
             }
         }
@@ -57,16 +59,6 @@ namespace RMC.BlockWorld.Mini.Controller
         }
         
         
-        private void View_OnReset()
-        {
-            RequireIsInitialized();
-            
-            //Reload current scene
-            //Great workflow for development
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        
-        
         private void View_OnBack()
         {
             RequireIsInitialized();
@@ -78,6 +70,24 @@ namespace RMC.BlockWorld.Mini.Controller
         {
             RequireIsInitialized();
             Context.CommandManager.InvokeCommand(new LoadSceneRequestCommand(ConfiguratorConstants.Scene05_DeveloperConsole));
+        }
+
+        
+        private void View_OnReset()
+        {
+            RequireIsInitialized();
+            
+            //Reload current scene
+            //Great workflow for development
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        
+
+        private async void View_OnNextLanguage()
+        {
+            RequireIsInitialized();
+            await CustomLocalizationUtility.SetSelectedLocaleToNextAsync();
+            
         }
     }
 }

@@ -1,5 +1,0 @@
-Source Url: 
-* https://docs.unity3d.com/Packages/com.unity.localization@1.5/manual/UIToolkit.html
-
-Changelog: 
-* Moved to /Assets/3rdParty/

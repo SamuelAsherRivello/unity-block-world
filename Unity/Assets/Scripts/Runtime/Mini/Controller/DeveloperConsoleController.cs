@@ -4,6 +4,7 @@ using RMC.BlockWorld.Mini.Model.Data;
 using RMC.BlockWorld.Mini.Service;
 using RMC.BlockWorld.Mini.Service.Storage;
 using RMC.BlockWorld.Mini.View;
+using RMC.BlockWorld.Standard;
 using RMC.Mini;
 
 namespace RMC.BlockWorld.Mini.Controller
@@ -31,6 +32,8 @@ namespace RMC.BlockWorld.Mini.Controller
 
                 //
                 _view.OnReset.AddListener(View_OnReset);
+                _view.OnRandomizeLanguage.AddListener(View_OnRandomizeLanguage);
+                
 
                 // Load the data as needed
                 _service.OnLoadCompleted.AddListener(Service_OnLoadCompleted);
@@ -50,6 +53,13 @@ namespace RMC.BlockWorld.Mini.Controller
 
         
         //  Event Handlers --------------------------------
+        
+        private async void View_OnRandomizeLanguage()
+        {
+            RequireIsInitialized();
+            await CustomLocalizationUtility.SetSelectedLocaleToNextAsync();
+        }
+            
         private void View_OnReset()
         {
             RequireIsInitialized();
