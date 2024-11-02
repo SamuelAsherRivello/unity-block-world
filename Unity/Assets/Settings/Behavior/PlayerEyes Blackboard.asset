@@ -1,0 +1,167 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd922ae02c94c87a66e46a10a7319b9, type: 3}
+  m_Name: PlayerEyes Blackboard
+  m_EditorClassIdentifier: 
+  AssetID:
+    m_Value0: 8379771341138251766
+    m_Value1: 11143427734777527833
+  m_Variables:
+  - rid: 6433369041674961558
+  - rid: 6433369041674961487
+  - rid: 6433369041674961488
+  - rid: 6433369041674961559
+  - rid: 6433369041674961580
+  - rid: 6433369041674961581
+  m_VersionTimestamp: 638661555598102504
+  m_CommandBuffer:
+    m_Commands: []
+  m_RuntimeBlackboardAsset: {fileID: 8036820197167616958}
+  references:
+    version: 2
+    RefIds:
+    - rid: 6433369041674961487
+      type: {class: 'TypedVariableModel`1[[System.Single, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 12050312532111788113
+          m_Value1: 17189172936962605943
+        Name: OpenWaitMin
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 2
+    - rid: 6433369041674961488
+      type: {class: 'TypedVariableModel`1[[System.Single, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 17153407111279114614
+          m_Value1: 8134882249311104508
+        Name: OpenWaitMax
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 5
+    - rid: 6433369041674961558
+      type: {class: 'TypedVariableModel`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 9457986145054593537
+          m_Value1: 1530152875439641904
+        Name: OpenScale
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {x: 0.2, y: 0.2, z: 0.2}
+    - rid: 6433369041674961559
+      type: {class: 'TypedVariableModel`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 7221117936372132888
+          m_Value1: 8669327347660956519
+        Name: ClosedScale
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {x: 0.1, y: 0.1, z: 0.1}
+    - rid: 6433369041674961580
+      type: {class: 'TypedVariableModel`1[[System.Single, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 6122086769681192516
+          m_Value1: 17257209729524206798
+        Name: ClosedWaitMin
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0.1
+    - rid: 6433369041674961581
+      type: {class: 'TypedVariableModel`1[[System.Single, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 1221759067768217363
+          m_Value1: 11064008997552330320
+        Name: ClosedWaitMax
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0.5
+--- !u!114 &8036820197167616958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
+  m_Name: Blackboard
+  m_EditorClassIdentifier: 
+  VersionTimestamp: 638661555598102504
+  AssetID:
+    m_Value0: 8379771341138251766
+    m_Value1: 11143427734777527833
+  m_Blackboard:
+    m_Variables:
+    - rid: 6433369041907482860
+    - rid: 6433369041907482861
+    - rid: 6433369041907482862
+    - rid: 6433369041907482863
+    - rid: 6433369041907482864
+    - rid: 6433369041907482865
+  m_SharedBlackboardVariableGuids: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 6433369041907482860
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 9457986145054593537
+          m_Value1: 1530152875439641904
+        Name: OpenScale
+        m_Value: {x: 0.2, y: 0.2, z: 0.2}
+    - rid: 6433369041907482861
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 12050312532111788113
+          m_Value1: 17189172936962605943
+        Name: OpenWaitMin
+        m_Value: 2
+    - rid: 6433369041907482862
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 17153407111279114614
+          m_Value1: 8134882249311104508
+        Name: OpenWaitMax
+        m_Value: 5
+    - rid: 6433369041907482863
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 7221117936372132888
+          m_Value1: 8669327347660956519
+        Name: ClosedScale
+        m_Value: {x: 0.1, y: 0.1, z: 0.1}
+    - rid: 6433369041907482864
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 6122086769681192516
+          m_Value1: 17257209729524206798
+        Name: ClosedWaitMin
+        m_Value: 0.1
+    - rid: 6433369041907482865
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1221759067768217363
+          m_Value1: 11064008997552330320
+        Name: ClosedWaitMax
+        m_Value: 0.5
