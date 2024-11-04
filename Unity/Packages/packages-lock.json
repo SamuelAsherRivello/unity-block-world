@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.rmc.rmc-mini-mvcs": {
-      "version": "2.2.6",
+      "version": "2.2.8",
       "depth": 0,
       "source": "registry",
       "dependencies": {},

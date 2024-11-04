@@ -15,10 +15,6 @@ MonoBehaviour:
   m_TableCollectionName: Main
   m_TableCollectionNameGuidString: 84b67792152ce6243a1216b276a3d5c2
   m_Entries:
-  - m_Id: 6928965730304
-    m_Key: "MENU_TITLE\t\t\t"
-    m_Metadata:
-      m_Items: []
   - m_Id: 413789749248
     m_Key: HUD_BACK
     m_Metadata:
@@ -75,14 +71,18 @@ MonoBehaviour:
     m_Key: CONSOLE_NEXT_LANGUAGE
     m_Metadata:
       m_Items: []
+  - m_Id: 232679227392
+    m_Key: MENU_TITLE
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 6433369019034894529
+    rid: 6433369133380796943
   references:
     version: 2
     RefIds:
-    - rid: 6433369019034894529
+    - rid: 6433369133380796943
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1730491744758
+        m_CustomEpoch: 1730929805723

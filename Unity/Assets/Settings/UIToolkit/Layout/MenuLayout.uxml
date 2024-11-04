@@ -7,9 +7,9 @@
                 <ui:VisualElement name="Top" style="flex-grow: 1; flex-direction: row;">
                     <ui:VisualElement name="TopLeft" class="body-quadrant" style="flex-basis: 50%;" />
                     <ui:VisualElement name="TopRight" class="body-quadrant">
-                        <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TitleLabel" selectable="true" class="title-label">
+                        <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TitleLabel" selectable="true" class="title-label" style="font-size: 80px;">
                             <Bindings>
-                                <UnityEngine.Localization.LocalizedString property="text" table="GUID:84b67792152ce6243a1216b276a3d5c2" entry="Id(6928965730304)" />
+                                <UnityEngine.Localization.LocalizedString property="text" table="GUID:84b67792152ce6243a1216b276a3d5c2" entry="Id(232679227392)" />
                             </Bindings>
                         </ui:Label>
                     </ui:VisualElement>

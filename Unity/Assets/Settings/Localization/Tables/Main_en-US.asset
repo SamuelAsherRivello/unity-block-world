@@ -18,6 +18,10 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
+  - m_Id: 232679227392
+    m_Localized: Block\nWorld
+    m_Metadata:
+      m_Items: []
   - m_Id: 413789749248
     m_Localized: Back
     m_Metadata:
@@ -32,10 +36,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4119780294656
     m_Localized: <b>Customize</b> Environment
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6928965730304
-    m_Localized: Block\nWorld
     m_Metadata:
       m_Items: []
   - m_Id: 9829792514048

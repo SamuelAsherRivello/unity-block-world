@@ -24,8 +24,8 @@
 # /[Aa]ssets/[Aa]sset[Ss]tore[Tt]ools*
 
 # Unity Packed Addressables
-[Uu]nity/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata.meta
-[Uu]nity/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata
+#[Uu]nity/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata.meta
+#[Uu]nity/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata
 
 # Unity StreamingAssets
 [Uu]nity/[Aa]ssets/[Ss]treaming[Aa]ssets.meta
