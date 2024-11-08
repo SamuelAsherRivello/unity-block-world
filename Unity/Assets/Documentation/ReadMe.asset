@@ -36,7 +36,7 @@ MonoBehaviour:
     MenuItemPath: 
   - TextHeading: 
     TextSubheading: 
-    TextBody: Open <b>any</b> Scene
+    TextBody: Open <b>any</b> Scene. Press play.
     LinkName: 
     LinkUrl: 
     PingObjectName: Scenes

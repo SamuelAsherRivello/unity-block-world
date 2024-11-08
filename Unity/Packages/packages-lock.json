@@ -1,5 +1,24 @@
 {
   "dependencies": {
+    "com.rmc.rmc-audio": {
+      "version": "1.8.4",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.rmc.rmc-readme": "1.2.1",
+        "com.rmc.rmc-core": "1.9.4"
+      },
+      "url": "https://registry.npmjs.org"
+    },
+    "com.rmc.rmc-core": {
+      "version": "1.9.5",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.rmc.rmc-unitask": "2.3.32"
+      },
+      "url": "https://registry.npmjs.org"
+    },
     "com.rmc.rmc-mini-mvcs": {
       "version": "2.2.8",
       "depth": 0,
@@ -10,6 +29,13 @@
     "com.rmc.rmc-readme": {
       "version": "1.2.2",
       "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://registry.npmjs.org"
+    },
+    "com.rmc.rmc-unitask": {
+      "version": "2.3.32",
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://registry.npmjs.org"

@@ -4,6 +4,7 @@ using RMC.Mini.View;
 using RMC.BlockWorld.Mini.Controller;
 using RMC.BlockWorld.Mini.Model;
 using RMC.BlockWorld.Mini.Model.Data;
+using RMC.BlockWorld.Standard;
 using RMC.BlockWorld.Standard.Objects;
 using RMC.Mini;
 using UnityEngine;
@@ -44,7 +45,7 @@ namespace RMC.BlockWorld.Mini.View
 
         [SerializeField] 
         private Player _player;
-        
+                
 
         //  Initialization  -------------------------------
         public void Initialize(IContext context)
@@ -58,7 +59,7 @@ namespace RMC.BlockWorld.Mini.View
                 BlockWorldModel model = Context.ModelLocator.GetItem<BlockWorldModel>();
                 model.CharacterData.OnValueChanged.AddListener(CharacterData_OnValueChanged);
                 model.EnvironmentData.OnValueChanged.AddListener(EnvironmentData_OnValueChanged);
-                
+
                 RefreshUI();
             }
         }
@@ -85,7 +86,6 @@ namespace RMC.BlockWorld.Mini.View
 
             // Optional: Handle any cleanup here...
         }
-
 
         //  Methods ---------------------------------------
         private void RefreshUI()

@@ -22,9 +22,19 @@
 ## Getting Started
 
 ### Play the demo
-1. Browse to [/Unity/Demo/WebGL/index.html](https://samuelasherrivello.github.io/unity-block-world/Unity/Demo/WebGL/index.html)
+
+Here you can play an existing build.
+
+| Platform      | Link | Known Issues                                                            |
+|---------------|------|-------------------------------------------------------------------------|
+| WebGPU        | [/Unity/Demo/WebGPUBuild/index.html](https://samuelasherrivello.github.io/unity-block-world/Unity/Demo/WebGPUBuild/index.html) | Shadows are low quality. Data changes (e.g., player color) do not save to disk |
+| Windows 11    | [/Unity/Demo/WindowsBuild.zip](https://samuelasherrivello.github.io/unity-block-world/Unity/Demo/WindowsBuild.zip) | None                                                       
+| Unity Editor  | (See Below) | None                                                                    |
 
 ### Build the demo
+
+Here you can build the project yourself.
+
 1. Download this repo (*.zip or *.git)
 1. Download the [Unity Editor](https://store.unity.com/#plans-individual)
 1. Open the `/Unity/` in the Unity Editor
@@ -36,6 +46,19 @@
 ## Overview
 
 ### Features
+
+#### Best Practices
+
+<img width = "600" src="./Unity/Assets/Documentation/Images/best-practices-software-and-unity-banner.png" />
+
+<BR>
+
+The project embraces many **software** best practices and **Unity-specific** best practices.
+
+<BR>
+<BR>
+
+### Packages
 
 #### Unity Packages
 
@@ -61,7 +84,8 @@
 | [RMC ReadMe ](https://www.npmjs.com/package/com.rmc.rmc-readme) | Display a custom ReadMe for the Unity Inspector Window.  |            
 
 
-
+<BR>
+<BR>
 
 
 

@@ -53,7 +53,9 @@ namespace RMC.BlockWorld.Mini.View
 
         [SerializeField] 
         private Player _player;
-
+        
+        // Audio
+        private AudioBinding _audioBinding;
         
         //  Initialization  -------------------------------
         public void Initialize(IContext context)
@@ -69,6 +71,12 @@ namespace RMC.BlockWorld.Mini.View
                 BlockWorldModel model = Context.ModelLocator.GetItem<BlockWorldModel>();
                 model.CharacterData.OnValueChanged.AddListener(CharacterData_OnValueChanged);
                 model.EnvironmentData.OnValueChanged.AddListener(EnvironmentData_OnValueChanged);
+
+                //Audio for every button
+                _audioBinding = CustomAudioUtility.CreateNewAudioBinding();
+                _audioBinding.RegisterButton(ResetButton);
+                _audioBinding.RegisterButton(NextLanguageButton);
+               
                 RefreshUI();
                 
             }
@@ -94,10 +102,14 @@ namespace RMC.BlockWorld.Mini.View
             }
             model.CharacterData.OnValueChanged.RemoveListener(CharacterData_OnValueChanged);
             model.EnvironmentData.OnValueChanged.RemoveListener(EnvironmentData_OnValueChanged);
+
+            if (_audioBinding != null)
+            {
+                _audioBinding.Dispose();
+            }
             
             // Optional: Handle any cleanup here...
         }
-
 
         //  Methods ---------------------------------------
         private async void RefreshUI()

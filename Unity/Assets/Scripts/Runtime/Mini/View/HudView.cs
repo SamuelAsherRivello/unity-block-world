@@ -2,6 +2,7 @@ using System;
 using RMC.Mini.View;
 using RMC.BlockWorld.Mini.Controller;
 using RMC.BlockWorld.Mini.Model;
+using RMC.BlockWorld.Standard;
 using RMC.Mini;
 using UnityEngine;
 using UnityEngine.Events;
@@ -58,6 +59,9 @@ namespace RMC.BlockWorld.Mini.View
         private InputAction _resetInputAction;
         private InputAction _nextLanguageInputAction;
         
+        // Audio
+        private AudioBinding _audioBinding;
+        
         //  Initialization  -------------------------------
         public void Initialize(IContext context)
         {
@@ -71,6 +75,11 @@ namespace RMC.BlockWorld.Mini.View
 
                 BackButton.clicked += BackButton_OnClicked;
                 DeveloperConsoleButton.clicked += DeveloperConsoleButton_OnClicked;
+
+                //Audio for every button
+                _audioBinding = CustomAudioUtility.CreateNewAudioBinding();
+                _audioBinding.RegisterButton(BackButton);
+                _audioBinding.RegisterButton(DeveloperConsoleButton);
                 
                 RefreshUI();
                 
@@ -140,6 +149,11 @@ namespace RMC.BlockWorld.Mini.View
             }
             model.HasLoadedService.OnValueChanged.RemoveListener(ServiceHasLoaded_OnValueChanged);
 
+            if (_audioBinding != null)
+            {
+                _audioBinding.Dispose();
+            }
+            
             // Optional: Handle any cleanup here...
         }
 

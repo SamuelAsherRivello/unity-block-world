@@ -1,3 +1,4 @@
+using RMC.Audio;
 using RMC.Mini.Controller;
 using RMC.Mini.Features.SceneSystem;
 using RMC.BlockWorld.Mini.Model;
@@ -59,15 +60,23 @@ namespace RMC.BlockWorld.Mini.Controller
         }
         
         
-        private void View_OnBack()
+        private async void View_OnBack()
         {
+            // Wait for button click
+            await AudioManager.Instance.WhileIsPlayingAsync();
+            
+            // Change scene
             RequireIsInitialized();
             Context.CommandManager.InvokeCommand(new LoadSceneRequestCommand(BlockWorldConstants.Scene01_Menu));
         }
         
         
-        private void View_OnDeveloperConsole()
+        private async void View_OnDeveloperConsole()
         {
+            // Wait for button click
+            await AudioManager.Instance.WhileIsPlayingAsync();
+            
+            // Change scene
             RequireIsInitialized();
             Context.CommandManager.InvokeCommand(new LoadSceneRequestCommand(BlockWorldConstants.Scene05_DeveloperConsole));
         }

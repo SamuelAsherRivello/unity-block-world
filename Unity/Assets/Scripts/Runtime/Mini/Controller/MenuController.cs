@@ -1,3 +1,4 @@
+using RMC.Audio;
 using RMC.Mini.Controller;
 using RMC.Mini.Features.SceneSystem;
 using RMC.BlockWorld.Mini.Model;
@@ -36,7 +37,6 @@ namespace RMC.BlockWorld.Mini.Controller
                 _view.OnCustomizeEnvironment.AddListener(View_OnCustomizeEnvironment);
                 Context.CommandManager.AddCommandListener<LoadSceneRequestCommand>(OnLoadSceneRequestCommand);
       
-                
                 // Load the data as needed
                 _service.OnLoadCompleted.AddListener(Service_OnLoadCompleted);
                 if (!_model.HasLoadedService.Value)
@@ -69,21 +69,34 @@ namespace RMC.BlockWorld.Mini.Controller
             _view.CustomizeEnvironmentButton.SetEnabled(false);
         }
         
-        private void View_OnCustomizeCharacter()
+        private async void View_OnCustomizeCharacter()
         {
+            // Wait for button click
+            await AudioManager.Instance.WhileIsPlayingAsync();
+            
+            // Change scene
+            
             RequireIsInitialized();
             Context.CommandManager.InvokeCommand(new LoadSceneRequestCommand(BlockWorldConstants.Scene02_CustomizeCharacter));
         }
         
 
-        private void View_OnCustomizeEnvironment()
+        private async void View_OnCustomizeEnvironment()
         {
+            // Wait for button click
+            await AudioManager.Instance.WhileIsPlayingAsync();
+            
+            // Change scene
             RequireIsInitialized();
             Context.CommandManager.InvokeCommand(new LoadSceneRequestCommand(BlockWorldConstants.Scene03_CustomizeEnvironment));
         }
         
-        private void View_OnPlay()
+        private async void View_OnPlay()
         {
+            // Wait for button click
+            await AudioManager.Instance.WhileIsPlayingAsync();
+            
+            // Change scene
             RequireIsInitialized();
             Context.CommandManager.InvokeCommand(new LoadSceneRequestCommand(BlockWorldConstants.Scene04_Game));
         }

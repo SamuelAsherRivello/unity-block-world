@@ -1,8 +1,11 @@
 using System;
+using System.Threading.Tasks;
+using RMC.Audio;
 using RMC.Mini.View;
 using RMC.BlockWorld.Mini.Controller;
 using RMC.BlockWorld.Mini.Model;
 using RMC.BlockWorld.Mini.Model.Data;
+using RMC.BlockWorld.Standard;
 using RMC.BlockWorld.Standard.Objects;
 using RMC.Mini;
 using UnityEngine;
@@ -56,7 +59,10 @@ namespace RMC.BlockWorld.Mini.View
 
         [SerializeField] 
         private Player _player;
-
+        
+        // Audio
+        private AudioBinding _audioBinding;
+        
         
         //  Initialization  -------------------------------
         public void Initialize(IContext context)
@@ -73,6 +79,13 @@ namespace RMC.BlockWorld.Mini.View
                 PlayGameButton.clicked += PlayButton_OnClicked;
                 CustomizeCharacterButton.clicked += CustomizeButton_OnClicked;
                 CustomizeEnvironmentButton.clicked += CustomizeEnvironmentButton_OnClicked;
+
+                //Audio for every button
+                _audioBinding = CustomAudioUtility.CreateNewAudioBinding();
+                _audioBinding.RegisterButton(PlayGameButton);
+                _audioBinding.RegisterButton(CustomizeCharacterButton);
+                _audioBinding.RegisterButton(CustomizeEnvironmentButton);
+               
                 RefreshUI();
             }
         }
@@ -91,12 +104,16 @@ namespace RMC.BlockWorld.Mini.View
         protected void OnDestroy()
         {
             BlockWorldModel model = Context.ModelLocator.GetItem<BlockWorldModel>();
-            if (model == null)
+            if (model != null)
             {
-                return;
+                model.CharacterData.OnValueChanged.RemoveListener(CharacterData_OnValueChanged);
+                model.EnvironmentData.OnValueChanged.RemoveListener(EnvironmentData_OnValueChanged);
             }
-            model.CharacterData.OnValueChanged.RemoveListener(CharacterData_OnValueChanged);
-            model.EnvironmentData.OnValueChanged.RemoveListener(EnvironmentData_OnValueChanged);
+
+            if (_audioBinding != null)
+            {
+                _audioBinding.Dispose();
+            }
             
             // Optional: Handle any cleanup here...
         }

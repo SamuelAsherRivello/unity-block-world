@@ -3,6 +3,7 @@ using RMC.Mini.View;
 using RMC.BlockWorld.Mini.Controller;
 using RMC.BlockWorld.Mini.Model;
 using RMC.BlockWorld.Mini.Model.Data;
+using RMC.BlockWorld.Standard;
 using RMC.Mini;
 using UnityEngine;
 using UnityEngine.Events;
@@ -45,7 +46,9 @@ namespace RMC.BlockWorld.Mini.View
         [Header("Gameplay")]
         [SerializeField] 
         private Gameplay_Environment _environment;
-        
+                
+        // Audio
+        private AudioBinding _audioBinding;
         
         //  Initialization  -------------------------------
         public void Initialize(IContext context)
@@ -58,6 +61,11 @@ namespace RMC.BlockWorld.Mini.View
                 BlockWorldModel model = Context.ModelLocator.GetItem<BlockWorldModel>();
                 model.EnvironmentData.OnValueChanged.AddListener(EnvironmentData_OnValueChanged);
                 RandomizeButton.clicked += RandomizeButton_OnClicked;
+
+                //Audio for every button
+                _audioBinding = CustomAudioUtility.CreateNewAudioBinding();
+                _audioBinding.RegisterButton(RandomizeButton);
+               
                 RefreshUI();
                 
             }
@@ -83,9 +91,13 @@ namespace RMC.BlockWorld.Mini.View
             }
             model.EnvironmentData.OnValueChanged.RemoveListener(EnvironmentData_OnValueChanged);
 
+            if (_audioBinding != null)
+            {
+                _audioBinding.Dispose();
+            }
+            
             // Optional: Handle any cleanup here...
         }
-
 
         //  Methods ---------------------------------------
         private void RefreshUI()
